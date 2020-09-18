@@ -58,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/user/login").permitAll()
                 .antMatchers("/api/v1/createadmins").permitAll()
                 .antMatchers("/swagger-ui/index.html*").permitAll()
-                .anyRequest().permitAll()
+                .anyRequest().permitAll() //Ezt majd átt kell irni
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and().sessionManagement()

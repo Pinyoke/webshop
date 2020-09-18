@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Filter;
 
 @RestController
 @CrossOrigin(origins = "*",allowedHeaders = "*")
@@ -27,6 +28,31 @@ public class ProductController {
 
     @PostMapping("/list")
     public ResponseEntity<List<Product>> listFilteredProducts(@RequestBody FilterTemplate filterTemplate){
+        return ResponseEntity.ok().body(productService.getFilteredProducts(filterTemplate));
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<Product>> getFilteredProducts(@RequestParam(required = false, name = "sex", defaultValue = "") String sex,
+                                                             @RequestParam(required = false, name = "category", defaultValue = "") String category,
+                                                             @RequestParam(required = false, name = "brand", defaultValue = "") String brand,
+                                                             @RequestParam(required = false, name = "priceMin", defaultValue = "0") int priceMin,
+                                                             @RequestParam(required = false, name = "priceMax", defaultValue = "0") int priceMax
+    ){
+        System.out.println(sex);
+        System.out.println(category);
+        System.out.println(brand);
+        System.out.println(priceMin);
+        System.out.println(priceMax);
+
+
+
+        FilterTemplate filterTemplate = new FilterTemplate();
+        filterTemplate.setBrand(brand);
+        filterTemplate.setCategory(category);
+        filterTemplate.setSex(sex);
+        filterTemplate.setPriceMax(priceMax);
+        filterTemplate.setPriceMin(priceMin);
+
         return ResponseEntity.ok().body(productService.getFilteredProducts(filterTemplate));
     }
 
