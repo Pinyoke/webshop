@@ -16,6 +16,9 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<org.projectlombok.version>1.18.12</org.projectlombok.version>
+		<io.jsonwebtoken>0.9.1</io.jsonwebtoken>
+		<org.springdoc>1.2.32</org.springdoc>
 	</properties>
 
 	<dependencies>
@@ -34,9 +37,14 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${org.projectlombok.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.2.32</version>
+			<version>${org.springdoc}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -50,7 +58,7 @@
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
-			<version>0.9.1</version>
+			<version>${io.jsonwebtoken}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -75,3 +83,4 @@
 	</build>
 
 </project>
+

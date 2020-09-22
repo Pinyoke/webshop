@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImp implements ProductService {
@@ -37,58 +38,7 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public List<Product> getFilteredProducts(FilterTemplate filterTemplate) {
-        List<Product> productList =  productRepository.findAll();
-        List<Product> sprtedList;
-        if(!filterTemplate.getBrand().equals("")){
-            sprtedList = new ArrayList<>();
-            for (Product product: productList) {
-                if(product.getBrand().equals(filterTemplate.getBrand())){
-                    sprtedList.add(product);
-                }
-            }
-            productList = sprtedList;
-        }
-
-
-        if(!filterTemplate.getCategory().equals("")){
-            sprtedList = new ArrayList<>();
-            for (Product product: productList) {
-                if(product.getCategory().equals(filterTemplate.getCategory())){
-                    sprtedList.add(product);
-                }
-            }
-            productList = sprtedList;
-        }
-
-
-        if(!filterTemplate.getSex().equals("")){
-            sprtedList = new ArrayList<>();
-            for (Product product: productList) {
-                if(product.getSex().equals(filterTemplate.getSex())){
-                    sprtedList.add(product);
-                }
-            }
-            productList = sprtedList;
-        }
-        if(filterTemplate.getPriceMax() > 0){
-            sprtedList = new ArrayList<>();
-            for (Product product: productList) {
-                if(product.getPrice() <= filterTemplate.getPriceMax()){
-                    sprtedList.add(product);
-                }
-            }
-            productList = sprtedList;
-        }
-        if(filterTemplate.getPriceMin() > 0){
-            sprtedList = new ArrayList<>();
-            for (Product product: productList) {
-                if(product.getPrice() >= filterTemplate.getPriceMin()){
-                    sprtedList.add(product);
-                }
-            }
-            productList = sprtedList;
-        }
-
+        List<Product> productList = productRepository.filteredProductList(filterTemplate.getBrand(),filterTemplate.getCategory(),filterTemplate.getSex(),filterTemplate.getPriceMin(),filterTemplate.getPriceMax());
 
         return productList;
     }
